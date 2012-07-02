@@ -39,7 +39,7 @@
     return [self dateWithInternetString:dateString useFormatter:nil];
 }
 
-+ (NSDate *)dateWithInternetString:(NSString *)dateString useFormatter:(NSDateFormatter **)outFormatter;
++ (NSDate *)dateWithInternetString:(NSString *)dateString useFormatter:(NSDateFormatter * __autoreleasing *)outFormatter;
 {
     if (outFormatter && *outFormatter) return [*outFormatter dateFromString:dateString];
     
