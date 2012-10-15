@@ -36,26 +36,31 @@
 
 - (id)initWithApplicationDefaults;
     {
-    NSBundle *theBundle = [NSBundle mainBundle];
-    NSString *theBundleName = [theBundle infoDictionary][(__bridge NSString *)kCFBundleNameKey];
-    // TODO - we should search for all .momd and .mom files and combine them perhaps?
-    NSURL *theModelURL = [theBundle URLForResource:theBundleName withExtension:@"momd"];
-
-    NSError *theError = NULL;
-    NSURL *theApplicationSupportDirectory = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:NULL create:YES error:&theError];
-
-    theApplicationSupportDirectory = [theApplicationSupportDirectory URLByAppendingPathComponent:theBundle.bundleIdentifier];
-    [[NSFileManager defaultManager] createDirectoryAtURL:theApplicationSupportDirectory withIntermediateDirectories:YES attributes:NULL error:&theError];
-
-    NSURL *thePersistentStoreURL = [[theApplicationSupportDirectory URLByAppendingPathComponent:theBundleName] URLByAppendingPathExtension:@"sqlite"];
-
-    if ((self = [self initWithModelURL:theModelURL persistentStoreURL:thePersistentStoreURL]) != NULL)
-        {
-        }
-    return self;
+    return [self initWithModelName:nil];
     }
 
 
+- (id)initWithModelName:(NSString *)modelName;
+    {
+    NSBundle *theBundle = [NSBundle mainBundle];
+    NSString *theBundleName = [theBundle infoDictionary][(__bridge NSString *)kCFBundleNameKey];
+    // TODO - we should search for all .momd and .mom files and combine them perhaps?
+    if (!modelName) modelName = theBundleName;
+    NSURL *theModelURL = [theBundle URLForResource:modelName withExtension:@"momd"];
+    
+    NSError *theError = NULL;
+    NSURL *theApplicationSupportDirectory = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:NULL create:YES error:&theError];
+    
+    theApplicationSupportDirectory = [theApplicationSupportDirectory URLByAppendingPathComponent:theBundle.bundleIdentifier];
+    [[NSFileManager defaultManager] createDirectoryAtURL:theApplicationSupportDirectory withIntermediateDirectories:YES attributes:NULL error:&theError];
+    
+    NSURL *thePersistentStoreURL = [[theApplicationSupportDirectory URLByAppendingPathComponent:theBundleName] URLByAppendingPathExtension:@"sqlite"];
+    
+    if (!(self = [self initWithModelURL:theModelURL persistentStoreURL:thePersistentStoreURL]))
+        return nil;
+    
+    return self;
+    }
 
 - (id)initWithModelURL:(NSURL *)inModelURL persistentStoreURL:(NSURL *)inPersistentStoreURL
     {

@@ -20,7 +20,7 @@
 @property (readonly, nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 - (id)initWithApplicationDefaults;
-
+- (id)initWithModelName:(NSString *)modelName;
 - (id)initWithModelURL:(NSURL *)inModelURL persistentStoreURL:(NSURL *)inPersistentStoreURL;
 
 @end
