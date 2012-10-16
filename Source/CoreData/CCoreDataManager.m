@@ -98,6 +98,10 @@
 
 - (NSManagedObjectContext *)managedObjectContext
     {
+        if (![NSThread isMainThread])
+        {
+            NSLog(@"***** CALLING MOC FROM THREAD %@ *****", [NSThread currentThread]);
+        }
     if (managedObjectContext == NULL)
         {
         managedObjectContext = [[self.managedObjectContextClass alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
