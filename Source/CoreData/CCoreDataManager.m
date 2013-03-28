@@ -54,7 +54,7 @@
     theApplicationSupportDirectory = [theApplicationSupportDirectory URLByAppendingPathComponent:theBundle.bundleIdentifier];
     [[NSFileManager defaultManager] createDirectoryAtURL:theApplicationSupportDirectory withIntermediateDirectories:YES attributes:NULL error:&theError];
     
-    NSURL *thePersistentStoreURL = [[theApplicationSupportDirectory URLByAppendingPathComponent:theBundleName] URLByAppendingPathExtension:@"sqlite"];
+    NSURL *thePersistentStoreURL = [[theApplicationSupportDirectory URLByAppendingPathComponent:modelName] URLByAppendingPathExtension:@"sqlite"];
     
     if (!(self = [self initWithModelURL:theModelURL persistentStoreURL:thePersistentStoreURL]))
         return nil;
