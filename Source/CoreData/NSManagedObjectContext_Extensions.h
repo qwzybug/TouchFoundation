@@ -31,6 +31,8 @@
 
 #import <CoreData/CoreData.h>
 
+#import "Asserts.h"
+
 @interface NSManagedObjectContext (NSManagedObjectContext_Extensions)
 
 #if DEBUG == 1
