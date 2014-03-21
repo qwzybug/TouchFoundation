@@ -31,18 +31,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NSData_Base64Extensions.h"
-
 int main (int argc, const char * argv[])
     {
     @autoreleasepool
         {
-        NSString *theSourceString = @"Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.";
-        NSData *theSourceData = [theSourceString dataUsingEncoding:NSASCIIStringEncoding];
-        NSString *theBase64String = [theSourceData asBase64EncodedString:Base64Flags_IncludeNewlines];
-        printf("%s\n", [theBase64String UTF8String]);
-        
-        
         }
     return 0;
     }
