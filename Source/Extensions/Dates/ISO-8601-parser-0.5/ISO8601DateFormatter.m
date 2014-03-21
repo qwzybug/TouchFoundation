@@ -670,6 +670,8 @@ static BOOL is_leap_year(NSUInteger year);
 		unparsingFormatter.calendar = unparsingCalendar;
 	}
 
+    unparsingFormatter.timeZone = timeZone;
+    
 	NSString *str = [unparsingFormatter stringForObjectValue:date];
 
 	if (includeTime) {
