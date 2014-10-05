@@ -51,10 +51,10 @@
     NSError *theError = NULL;
     NSURL *theApplicationSupportDirectory = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:NULL create:YES error:&theError];
     
-    theApplicationSupportDirectory = [theApplicationSupportDirectory URLByAppendingPathComponent:theBundle.bundleIdentifier];
+    theApplicationSupportDirectory = [theApplicationSupportDirectory URLByAppendingPathComponent:theBundleName];
     [[NSFileManager defaultManager] createDirectoryAtURL:theApplicationSupportDirectory withIntermediateDirectories:YES attributes:NULL error:&theError];
     
-    NSURL *thePersistentStoreURL = [[theApplicationSupportDirectory URLByAppendingPathComponent:theBundleName] URLByAppendingPathExtension:@"sqlite"];
+    NSURL *thePersistentStoreURL = [[theApplicationSupportDirectory URLByAppendingPathComponent:modelName] URLByAppendingPathExtension:@"sqlite"];
     
     if (!(self = [self initWithModelURL:theModelURL persistentStoreURL:thePersistentStoreURL]))
         return nil;
