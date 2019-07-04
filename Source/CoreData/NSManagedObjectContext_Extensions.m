@@ -233,6 +233,7 @@ return(theCount);
 - (BOOL)performBlockAndSave:(void (^)(void))block error:(NSError **)outError
     {
     AssertParameter_(block);
+    __block __autoreleasing NSError **_outError = nil;
     
     if ([self hasChanges])
         {
@@ -261,7 +262,7 @@ return(theCount);
             if ([self hasChanges] == YES)
                 {
 //                NSLog(@"Saving %@", self);
-                theResult = [self save:outError];
+                theResult = [self save:_outError];
                 }
             }
         @catch (NSException * e)
@@ -273,17 +274,18 @@ return(theCount);
                 [self rollback];
                 }
             
-            if (outError)
+            if (_outError != nil)
                 {
                 NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                     [NSString stringWithFormat:@"Exception thrown while performing transaction: %@", e], NSLocalizedDescriptionKey,
                     e, @"exception",
                     NULL];
-                *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:-1 userInfo:theUserInfo];
+                *_outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:-1 userInfo:theUserInfo];
                 }
             }
         }];
     
+    outError = _outError;
     return(theResult);
     }
 

@@ -109,7 +109,7 @@
         managedObjectContext.debugName = @"main";
         #endif
         [managedObjectContext performBlockAndWait:^{
-            managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+            self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
             }];
         }
     return(managedObjectContext);

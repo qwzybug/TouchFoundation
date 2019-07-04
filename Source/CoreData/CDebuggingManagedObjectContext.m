@@ -18,7 +18,7 @@
 
 @synthesize callStacksForDirtyPerformBlocks;
 
-- (void)performBlockAndWait:(void (^)())block
+- (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block
     {
     [super performBlockAndWait:block];
 
